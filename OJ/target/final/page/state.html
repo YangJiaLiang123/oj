@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../layui/css/layui.css" media="all">
+        <link rel="stylesheet" href="../css/question.css" media="all">
+        <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+        <link rel="stylesheet" href="../css/common.css" media="all" />
+        <style type="text/css">
+            /*div{*/
+                /*font-size: 2em;*/
+            /*}*/
+            /*td div{*/
+                /*height: 80px;*/
+            /*}*/
+        </style>
+    </head>
+    <body>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend id="titlelist">提交状态</legend></fieldset>
+
+            <table class="layui-hide" id="table" lay-filter="demo"></table>
+
+            <script src="../layui/layui.js"></script>
+
+        <script>
+            layui.use(['table','layer'], function(){
+              var table = layui.table;
+              var layer = layui.layer;
+
+              table.render({
+                elem: '#table'
+                ,url:'http://localhost:8080/WebContent/user/answer.do'
+                ,cols: [[
+                  {field:'id', width:80,style:'height:48px;font-size:24px;', title: 'ID', sort: true}
+                  ,{field:'user', width:80,style:'font-size:24px;', title: '用户'}
+                  ,{field:'problem',width:80,style:'font-size:24px;', title: '问题', sort: true,minWidth: 150}
+                  ,{field:'result',style:'', title: '结果', templet: '#res'}
+                  ,{field:'memory',width:80,style:'font-size:24px;',title: '内存'}
+                  ,{field:'time',width:80,style:'font-size:24px;',title: '耗时'}
+                  ,{field:'lang',width:80,style:'font-size:24px;',title: '语言'}
+                  // ,{field:'length',width:100,title: '代码长度'}
+                  ,{field:'subtime',width:100,style:'font-size:24px;',title: '提交时间'}
+                  // ,{field:'judger',width:100,title: '判题机'}
+                  // ,{title:'',width:100, align:'center', toolbar: '#barDemo'}
+                ]]
+                ,page: true
+                ,even: true 
+                ,size: 'lg'
+              });
+            });
+
+        </script>
+
+        <script type="text/html" id="res">
+            {{#  if(d.result === '-3'){ }}
+            <button class="layui-btn layui-btn-fluid layui-btn-radius" >Compile Error</button>
+            {{#  } else if(d.result === '-2') { }}
+            <button class="layui-btn layui-btn-fluid layui-btn-radius" >Judging</button>
+            {{#  } else if(d.result === '-1') { }}
+            <button class="layui-btn layui-btn-fluid layui-btn-radius" >Wrong Answer</button>
+            {{#  } else if(d.result === '0') { }}
+            <button class="layui-btn layui-btn-fluid layui-btn-radius" >Accept</button>
+            {{#  } else if(d.result === '1') { }}
+            <button class="layui-btn layui-btn-fluid layui-btn-radius" >Time Limit Exceeded</button>
+            {{#  } else if(d.result === '3') { }}
+            <button class="layui-btn layui-btn-fluid layui-btn-radius" >Memory Limit Exceeded</button>
+            {{#  } else if(d.result === '4') { }}
+            <button class="layui-btn layui-btn-fluid layui-btn-radius" >Runtime Error</button>
+            {{#  } else if(d.result === '5') { }}
+            <button class="layui-btn layui-btn-fluid layui-btn-radius" >System Error</button>
+            {{#  } else if(d.result === '-') { }}
+            <button class="layui-btn layui-btn-fluid layui-btn-radius" >Pending</button>
+            {{#  } else { }}
+            <button class="layui-btn layui-btn-fluid layui-btn-radius" >UNKNOW</button>
+            {{#  } }}
+        </script>
+
+    </body>
+</html>

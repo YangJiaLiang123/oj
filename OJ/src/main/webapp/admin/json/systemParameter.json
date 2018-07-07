@@ -1,0 +1,14 @@
+{
+    "cmsName": "河北师大OJ平台管理系统",
+    "version": "0.1.0",
+    "author": "河北师大OJ开发团队",
+    "homePage": "admin/index.jsp",
+    "server": "CentOS",
+    "dataBase": "MYSQL",
+    "maxUpload": "2M",
+    "userRights": "总管理员",
+    "description": "河北师大OJ平台管理系统",
+    "powerby": "",
+    "record": "",
+    "keywords": "JAVAEE,layui"
+}

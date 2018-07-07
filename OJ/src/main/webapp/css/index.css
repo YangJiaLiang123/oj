@@ -1,0 +1,41 @@
+/*
+* @Author: anchen
+* @Date:   2018-06-05 13:12:07
+* @Last Modified by:   anchen
+* @Last Modified time: 2018-06-06 08:57:29
+*/
+#header{
+    width: 100%;
+    /*background-color: #333333;*/
+}
+.logo_div{
+    float: left;
+    margin: 10px 10px;
+    margin-left: 30px;
+}
+.title_div{
+    float: left;
+}
+.logo{
+    width: 35px;
+    height: 35px;
+}
+.header .content{
+    color: white;
+    width: 80%;
+    margin:  0 auto;
+}
+.title{
+    padding-top: 10px;
+    color: whitesmoke;
+}
+.user-info{
+    width: 200px;
+    float:right;
+}
+.main{
+    width: 100%;
+    padding: 0 auto;
+    display: block;
+    height: 100%;
+}

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etc.dao.TopicDao" >
+  <resultMap id="BaseResultMap" type="Topic" >
+    <id column="topic_id" property="topicId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="input" property="input" jdbcType="VARCHAR" />
+    <result column="output" property="output" jdbcType="VARCHAR" />
+    <result column="sample_input" property="sampleInput" jdbcType="VARCHAR" />
+    <result column="sample_output" property="sampleOutput" jdbcType="VARCHAR" />
+    <result column="hint" property="hint" jdbcType="VARCHAR" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="time_limit" property="timeLimit" jdbcType="INTEGER" />
+    <result column="memory_limit" property="memoryLimit" jdbcType="INTEGER" />
+    <result column="accepted" property="accepted" jdbcType="INTEGER" />
+    <result column="solved" property="solved" jdbcType="INTEGER" />
+    <result column="submit" property="submit" jdbcType="INTEGER" />
+    <result column="submit_user" property="submitUser" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="dificulty" property="dificulty" jdbcType="INTEGER" />
+    <result column="ratio" property="ratio" jdbcType="REAL" />
+    <collection property="students" ofType="Studnet">
+        <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="studentname" property="studentname" jdbcType="VARCHAR" />
+	    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+	    <result column="password" property="password" jdbcType="VARCHAR" />
+	    <result column="email" property="email" jdbcType="VARCHAR" />
+	    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+	    <result column="type" property="type" jdbcType="INTEGER" />   
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    topic_id, title, description, input, output, sample_input, sample_output, hint, source, 
+    time_limit, memory_limit, accepted, solved, submit, submit_user, create_date, author, 
+    dificulty, ratio
+  </sql>
+  
+  <select id="selectById" resultMap="BaseResultMap" parameterType="Topic">
+    select * from topic where topic_id=#{id}
+  </select>
+  
+  <select id="selectByDificulty" resultMap="BaseResultMap" parameterType="Page">
+    select * from topic where dificulty=#{queryCondition} limit #{startRow},#{pageSize}
+  </select>
+  
+  <select id="selectCount" parameterType="Topic" resultType="java.lang.Integer"> 
+    select count(topic_id) from topic where dificulty=#{a}
+  </select>
+
+  <select id="selectAllCount" resultType="java.lang.Integer">
+    select count(topic_id) from topic
+  </select>
+  
+  <select id="searchInvList" parameterType="Page" resultMap="BaseResultMap">
+    select * from topic limit #{startRow},#{pageSize}
+  </select>
+
+    <select id="searchTotalCount" parameterType="Page"
+        resultType="java.lang.Integer">
+        select count(topic_id) from topic <where>
+            <if test="queryCondition!=null">
+                and title like CONCAT('%',#{queryCondition},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getInvBycondtion" parameterType="Page" resultMap="BaseResultMap">
+    
+        select * from topic
+         <where>
+            <if test="queryCondition!=null">
+                 title like  CONCAT('%',#{queryCondition},'%')
+            </if>
+        </where>
+      </select>
+
+    <delete id="deleteInvition" parameterType="java.lang.Integer">
+        delete from topic where topic_id = #{topicId,jdbcType=INTEGER}
+    </delete>
+    
+  <update id="updateByPrimaryKeySelective" parameterType="Topic" >
+    update topic
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="input != null" >
+        input = #{input,jdbcType=VARCHAR},
+      </if>
+      <if test="output != null" >
+        output = #{output,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleInput != null" >
+        sample_input = #{sampleInput,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleOutput != null" >
+        sample_output = #{sampleOutput,jdbcType=VARCHAR},
+      </if>
+      <if test="hint != null" >
+        hint = #{hint,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="timeLimit != null" >
+        time_limit = #{timeLimit,jdbcType=INTEGER},
+      </if>
+      <if test="memoryLimit != null" >
+        memory_limit = #{memoryLimit,jdbcType=INTEGER},
+      </if>
+      <if test="accepted != null" >
+        accepted = #{accepted,jdbcType=INTEGER},
+      </if>
+      <if test="solved != null" >
+        solved = #{solved,jdbcType=INTEGER},
+      </if>
+      <if test="submit != null" >
+        submit = #{submit,jdbcType=INTEGER},
+      </if>
+      <if test="submitUser != null" >
+        submit_user = #{submitUser,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="author != null" >
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="dificulty != null" >
+        dificulty = #{dificulty,jdbcType=REAL},
+      </if>
+      <if test="ratio != null" >
+        ratio = #{ratio,jdbcType=REAL},
+      </if>
+    </set>
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="Topic" >
+    update topic
+    set title = #{title,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      input = #{input,jdbcType=VARCHAR},
+      output = #{output,jdbcType=VARCHAR},
+      sample_input = #{sampleInput,jdbcType=VARCHAR},
+      sample_output = #{sampleOutput,jdbcType=VARCHAR},
+      hint = #{hint,jdbcType=VARCHAR},
+      source = #{source,jdbcType=VARCHAR},
+      time_limit = #{timeLimit,jdbcType=INTEGER},
+      memory_limit = #{memoryLimit,jdbcType=INTEGER},
+      accepted = #{accepted,jdbcType=INTEGER},
+      solved = #{solved,jdbcType=INTEGER},
+      submit = #{submit,jdbcType=INTEGER},
+      submit_user = #{submitUser,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      author = #{author,jdbcType=VARCHAR},
+      dificulty = #{dificulty,jdbcType=REAL},
+      ratio = #{ratio,jdbcType=REAL}
+    where topic_id = #{topicId,jdbcType=INTEGER}
+  </update>
+  <insert id="insert" parameterType="Topic" >
+    insert into topic (topic_id, title, description, 
+      input, output, sample_input, 
+      sample_output, hint, source, 
+      time_limit, memory_limit, accepted, 
+      solved, submit, submit_user, 
+      create_date, author, dificulty, 
+      ratio)
+    values (#{topicId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{input,jdbcType=VARCHAR}, #{output,jdbcType=VARCHAR}, #{sampleInput,jdbcType=VARCHAR}, 
+      #{sampleOutput,jdbcType=VARCHAR}, #{hint,jdbcType=VARCHAR}, #{source,jdbcType=VARCHAR}, 
+      #{timeLimit,jdbcType=INTEGER}, #{memoryLimit,jdbcType=INTEGER}, #{accepted,jdbcType=INTEGER}, 
+      #{solved,jdbcType=INTEGER}, #{submit,jdbcType=INTEGER}, #{submitUser,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{author,jdbcType=VARCHAR}, #{dificulty,jdbcType=REAL}, 
+      #{ratio,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="Topic" >
+    insert into topic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="topicId != null" >
+        topic_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="input != null" >
+        input,
+      </if>
+      <if test="output != null" >
+        output,
+      </if>
+      <if test="sampleInput != null" >
+        sample_input,
+      </if>
+      <if test="sampleOutput != null" >
+        sample_output,
+      </if>
+      <if test="hint != null" >
+        hint,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="timeLimit != null" >
+        time_limit,
+      </if>
+      <if test="memoryLimit != null" >
+        memory_limit,
+      </if>
+      <if test="accepted != null" >
+        accepted,
+      </if>
+      <if test="solved != null" >
+        solved,
+      </if>
+      <if test="submit != null" >
+        submit,
+      </if>
+      <if test="submitUser != null" >
+        submit_user,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="author != null" >
+        author,
+      </if>
+      <if test="dificulty != null" >
+        dificulty,
+      </if>
+      <if test="ratio != null" >
+        ratio,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="topicId != null" >
+        #{topicId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="input != null" >
+        #{input,jdbcType=VARCHAR},
+      </if>
+      <if test="output != null" >
+        #{output,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleInput != null" >
+        #{sampleInput,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleOutput != null" >
+        #{sampleOutput,jdbcType=VARCHAR},
+      </if>
+      <if test="hint != null" >
+        #{hint,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="timeLimit != null" >
+        #{timeLimit,jdbcType=INTEGER},
+      </if>
+      <if test="memoryLimit != null" >
+        #{memoryLimit,jdbcType=INTEGER},
+      </if>
+      <if test="accepted != null" >
+        #{accepted,jdbcType=INTEGER},
+      </if>
+      <if test="solved != null" >
+        #{solved,jdbcType=INTEGER},
+      </if>
+      <if test="submit != null" >
+        #{submit,jdbcType=INTEGER},
+      </if>
+      <if test="submitUser != null" >
+        #{submitUser,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="author != null" >
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="dificulty != null" >
+        #{dificulty,jdbcType=REAL},
+      </if>
+      <if test="ratio != null" >
+        #{ratio,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>

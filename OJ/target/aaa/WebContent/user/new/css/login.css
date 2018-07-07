@@ -1,0 +1,15 @@
+/* 
+* @Author: anchen
+* @Date:   2018-06-05 16:28:25
+* @Last Modified by:   anchen
+* @Last Modified time: 2018-06-06 07:00:40
+*/
+.layui-form-item{
+    margin-bottom: 0;
+}
+.layui-form-label{
+    padding-left: 0;
+}
+.more{
+    margin-top: 10px;
+}

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etc.dao.AnswerInfoDao" >
+  <resultMap id="BaseResultMap" type="AnswerInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="student_id" property="studnet.id" jdbcType="INTEGER" />
+    <result column="question_id" property="topic.topicId" jdbcType="INTEGER" />
+    <result column="situation" property="situation" jdbcType="VARCHAR" />
+    <result column="memory" property="memory" jdbcType="BIGINT" />
+    <result column="preset_time" property="presetTime" jdbcType="INTEGER" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="submit_time" property="submitTime" jdbcType="TIMESTAMP" />
+    
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, student_id, question_id, situation, memory, preset_time, language, 
+    submit_time
+  </sql>
+
+  <select id="searchInvList" parameterType="Page" resultMap="BaseResultMap">
+    select * from student_question limit #{startRow},#{pageSize}
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from student_question
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAll" parameterType="Page" resultMap="BaseResultMap">
+    select * from student_question limit #{startRow},#{pageSize}
+  </select>
+
+    <select id="selectAllCounts" parameterType="Page"
+        resultType="java.lang.Integer">
+        select count(id) from student_question <where>
+            <if test="queryCondition!=null">
+                and situation like CONCAT('%',#{queryCondition},'%')
+            </if>
+        </where>
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from student_question
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="AnswerInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into student_question (id, student_id, question_id, 
+      situation, memory, preset_time, 
+      language, submit_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{studnet.id,jdbcType=INTEGER}, #{topic.topicId,jdbcType=INTEGER}, 
+      #{situation,jdbcType=VARCHAR}, #{memory,jdbcType=BIGINT}, #{presetTime,jdbcType=INTEGER}, 
+      #{language,jdbcType=VARCHAR}, #{submitTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="AnswerInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into student_question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="questionId != null" >
+        question_id,
+      </if>
+      <if test="situation != null" >
+        situation,
+      </if>
+      <if test="memory != null" >
+        memory,
+      </if>
+      <if test="presetTime != null" >
+        preset_time,
+      </if>
+      <if test="language != null" >
+        language,
+      </if>
+      <if test="submitTime != null" >
+        submit_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="questionId != null" >
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="situation != null" >
+        #{situation,jdbcType=VARCHAR},
+      </if>
+      <if test="memory != null" >
+        #{memory,jdbcType=BIGINT},
+      </if>
+      <if test="presetTime != null" >
+        #{presetTime,jdbcType=INTEGER},
+      </if>
+      <if test="language != null" >
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="AnswerInfo" >
+    update student_question
+    <set >
+      <if test="studnet != null" >
+        student_id = #{studnet.id,jdbcType=INTEGER},
+      </if>
+      <if test="topic != null" >
+        question_id = #{topic.topicId,jdbcType=INTEGER},
+      </if>
+      <if test="situation != null" >
+        situation = #{situation,jdbcType=VARCHAR},
+      </if>
+      <if test="memory != null" >
+        memory = #{memory,jdbcType=BIGINT},
+      </if>
+      <if test="presetTime != null" >
+        preset_time = #{presetTime,jdbcType=INTEGER},
+      </if>
+      <if test="language != null" >
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        submit_time = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="AnswerInfo" >
+    update student_question
+    set student_id = #{studnet.id,jdbcType=INTEGER},
+      question_id = #{questionId,jdbcType=INTEGER},
+      situation = #{situation,jdbcType=VARCHAR},
+      memory = #{memory,jdbcType=BIGINT},
+      preset_time = #{presetTime,jdbcType=INTEGER},
+      language = #{language,jdbcType=VARCHAR},
+      submit_time = #{submitTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

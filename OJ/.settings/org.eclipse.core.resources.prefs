@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//src/main/java=GBK
+encoding//src/main/java/com/etc=UTF-8
+encoding//src/main/java/com/etc/action=UTF-8
+encoding//src/main/java/com/etc/action/AdminAction.java=UTF-8
+encoding//src/main/java/com/etc/action/AdminStudentAction.java=GBK
+encoding//src/main/java/com/etc/action/StudentAction.java=GBK
+encoding//src/main/java/com/etc/action/TopicAction.java=GBK
+encoding//src/main/resources=UTF-8
+encoding//src/main/webapp/WebContent/user/css/page.css=UTF-8
+encoding//src/main/webapp/user/login/login.jsp=UTF-8
+encoding//src/main/webapp/user/login/register.jsp=UTF-8
+encoding//src/test/java=UTF-8

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration   
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>  
+    <!-- 
+          使得我们可以在UserMapper.xml中直接使用User，而不用写全名com.etc.entity.User
+    </span><span style="font-size:18px;">批量定义别名，使得</span>
+    <span style="font-size:18px;">com.etc.entity包下的所有bean都使用别名</span>
+    <span style="font-size:18px;color:#ff6600;">（别名就是类名，首字母大写或小写都可以）</span>
+    <span style="font-size:18px;"> -->  
+    <typeAliases>  
+        <package name="com.etc.bean"/>  
+    </typeAliases>  
+</configuration>

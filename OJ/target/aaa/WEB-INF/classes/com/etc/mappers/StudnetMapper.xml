@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etc.dao.StudnetDao" >
+  <resultMap id="BaseResultMap" type="Studnet" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="studentname" property="studentname" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />   
+    <collection property="topics" ofType="Topic">
+        <id column="topic_id" property="topicId" jdbcType="INTEGER" />
+	    <result column="title" property="title" jdbcType="VARCHAR" />
+	    <result column="description" property="description" jdbcType="VARCHAR" />
+	    <result column="input" property="input" jdbcType="VARCHAR" />
+	    <result column="output" property="output" jdbcType="VARCHAR" />
+	    <result column="sample_input" property="sampleInput" jdbcType="VARCHAR" />
+	    <result column="sample_output" property="sampleOutput" jdbcType="VARCHAR" />
+	    <result column="hint" property="hint" jdbcType="VARCHAR" />
+	    <result column="source" property="source" jdbcType="VARCHAR" />
+	    <result column="time_limit" property="timeLimit" jdbcType="INTEGER" />
+	    <result column="memory_limit" property="memoryLimit" jdbcType="INTEGER" />
+	    <result column="accepted" property="accepted" jdbcType="INTEGER" />
+	    <result column="solved" property="solved" jdbcType="INTEGER" />
+	    <result column="submit" property="submit" jdbcType="INTEGER" />
+	    <result column="submit_user" property="submitUser" jdbcType="INTEGER" />
+	    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+	    <result column="author" property="author" jdbcType="VARCHAR" />
+	    <result column="dificulty" property="dificulty" jdbcType="INTEGER" />
+	    <result column="ratio" property="ratio" jdbcType="REAL" />
+    </collection>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, studentname, nickname, password, email, telephone, type
+  </sql>
+  <select id="select" resultMap="BaseResultMap" parameterType="Studnet" >
+    select * from students where studentname=#{studentname} and password=#{password}  
+  </select>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="Studnet" >
+    select * from students where id=#{id}
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="Studnet">
+    select * from students where studentname=#{studentname}
+  </select>
+  <select id="selectByNickName" resultMap="BaseResultMap" parameterType="Studnet">
+    select * from students where nickname=#{nickname}
+  </select>
+  <select id="selectByEmail" resultMap="BaseResultMap" parameterType="Studnet">
+    select * from students where email=#{email}
+  </select>
+  <select id="selectByTelephone" resultMap="BaseResultMap" parameterType="Studnet">
+    select * from students where telephone=#{telephone}
+  </select>
+  
+  <select id="selectAll" parameterType="Page" resultMap="BaseResultMap">
+    select * from students where type=#{queryCondition} limit #{startRow},#{pageSize}
+  </select>
+
+    <select id="selectAllCounts" parameterType="Page"
+        resultType="java.lang.Integer">
+        select count(id) from students where type=#{queryCondition} 
+    </select>
+
+    <select id="selectSome" parameterType="Page" resultMap="BaseResultMap">   
+        select * from students
+         <where>
+            <if test="queryCondition!=null">
+                 studentname like  CONCAT('%',#{queryCondition},'%')
+            </if>
+        </where>
+    </select>  
+    <select id="selectSomeCounts" parameterType="Page" resultType="java.lang.Integer">   
+        select count(id) from students
+         <where>
+            <if test="queryCondition!=null">
+                 studentname like  CONCAT('%',#{queryCondition},'%')
+            </if>
+        </where>
+    </select>  
+    
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from students
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="Studnet" >
+    insert into students (id, studentname, nickname, 
+      password, email, telephone, type
+      )
+    values (#{id,jdbcType=INTEGER}, #{studentname,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="Studnet" >
+    insert into students
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="studentname != null" >
+        studentname,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="studentname != null" >
+        #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateSelective" parameterType="Studnet" >
+    update students
+    <set >
+      <if test="studentname != null" >
+        studentname = #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="update" parameterType="Studnet" >
+    update students
+    set studentname = #{studentname,jdbcType=VARCHAR},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

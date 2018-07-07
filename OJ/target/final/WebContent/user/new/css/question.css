@@ -1,0 +1,24 @@
+/* 
+* @Author: anchen
+* @Date:   2018-06-06 07:30:22
+* @Last Modified by:   anchen
+* @Last Modified time: 2018-06-06 09:24:43
+*/
+.layui-table-main{
+     overflow-x: hidden;
+}
+#titlelist{
+    font-size: 3em;
+}
+table.layui-table td{
+    font-size: 2em;
+}
+table.layui-table th{
+    font-size: 2em;
+}
+/*.layui-table-page .layui-laypage-default{
+    width: 100%;
+}
+.layui-table-page div div a{
+    font-size: 2em;
+}*/

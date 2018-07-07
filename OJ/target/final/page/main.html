@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="../layui/css/layui.css" media="all" /></head>
+        <link rel="stylesheet" href="../css/common.css" media="all" />
+    <body style="padding: 0 5%">
+        <div>
+            <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+                <legend>主页</legend></fieldset>
+            <div style="padding: 20px; background-color: #F2F2F2;">
+                <div class="layui-row layui-col-space15">
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">新闻</div>
+                            <div class="layui-card-body">
+                                <div class="layui-carousel" id="test2" style="margin-top: 15px;">
+                                    <div carousel-item="">
+                                        <div>条目1</div>
+                                        <div>条目2</div>
+                                        <div>条目3</div>
+                                        <div>条目4</div>
+                                        <div>条目5</div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md9">
+                        <div class="layui-card">
+                            <div class="layui-card-header">~</div>
+                            <div class="layui-card-body"></div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md3">
+                        <div class="layui-card">
+                            <div class="layui-card-header">状态</div>
+                            <div class="layui-card-body">
+                                <p>实时更新</p>
+                                <ul>
+                                    <li>在线人数</li>
+                                    <li>新提交数</li></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header">其他</div>
+                            <div class="layui-card-body">
+                                <div>
+                                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                                        <legend>河北师大OJ平台Q&amp;A</legend></fieldset>
+                                    <div class="layui-collapse" lay-filter="test">
+                                        <div class="layui-colla-item">
+                                            <h2 class="layui-colla-title">河北师大OJ平台能做什么</h2>
+                                            <div class="layui-colla-content">
+                                                <p>就如其他OJ平台一样，河北师大OJ平台旨在为河北师范大学软件学院和数信学院提供更见方便和具有针对性的算法学校平台，营造专业的竞赛气氛，并且为大家提供各大竞赛的参加捷径。</p>
+                                                <p>你可以使用OJ平台来学习算法知识，解决算法题目；参加或举办算法竞赛，一般校内代表队会由参加竞赛的优秀队伍中选出；使用讨论版和博客，记录或查看其他同学的学习经验；在资源模块下载软件、电子书或其他所需资料。</p>
+                                            </div>
+                                        </div>
+                                        <div class="layui-colla-item">
+                                            <h2 class="layui-colla-title">支持语言？</h2>
+                                            <div class="layui-colla-content">
+                                                <p>目前仅支持C和C++</p>
+                                            </div>
+                                        </div>
+                                        <div class="layui-colla-item">
+                                            <h2 class="layui-colla-title">代码提交注意事项</h2>
+                                            <div class="layui-colla-content">
+                                                <p>C和C++的main函数定义为&quot;int main(void)&quot;返回值为&quot;return 0;&quot;，因为判题核心还在开发阶段，尚不知违反定义规则会发生的怎样的错误。</p>
+                                            </div>
+                                        </div>
+                                        <div class="layui-colla-item">
+                                            <h2 class="layui-colla-title">算法的提交代码结果</h2>
+                                            <div class="layui-colla-content">
+                                                <p>编译异常：Compile Error</p>
+                                                <p>错误答案：Wrong Answer</p>
+                                                <p>正确：Accepted</p>
+                                                <p>超出时间限制：Time Limit Exceeded</p>
+                                                <p>超内存内存限制：Memory Limit Exceeded</p>
+                                                <p>运行时异常：Runtime Error</p>
+                                                <p>系统异常：System Error</p>
+                                            </div>
+                                        </div>
+                                        <div class="layui-colla-item">
+                                            <h2 class="layui-colla-title">加入河北师大OJ开发组</h2>
+                                            <div class="layui-colla-content">
+                                                <p>河北师范大学OJ平台目前处于Alpha测试阶段。如果您是河北师范大学的学生、老师或其他职工人员，擅长至少一种建站编程语言，并且希望为OJ的搭建和维护贡献一份力量，我们欢迎您的加入，联系方式如下：</p>
+                                                <p>Email:138841996@qq.com</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="../layui/layui.js" charset="utf-8"></script>
+        <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+        <script>layui.use(['element', 'layer', 'carousel', 'form'],
+            function() {
+                var element = layui.element;
+                var layer = layui.layer;
+                var carousel = layui.carousel;
+
+                //常规轮播
+                carousel.render({
+                    elem: '#test2',
+                    width: '100%',
+                    height: '300px',
+                    interval: 1200,
+                    anim: 'fade',
+                    height: '120px'
+                });
+
+                //监听折叠
+                element.on('collapse(test)',
+                function(data) {
+                    layer.msg('展开状态：' + data.show);
+                });
+
+                
+            });</script>
+    </body>
+
+</html>

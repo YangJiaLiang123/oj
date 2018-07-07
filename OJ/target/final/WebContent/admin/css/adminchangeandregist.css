@@ -1,0 +1,31 @@
+	 .admin-regist-lable{
+		width: 80px;
+    	float: left;
+    	padding-top: 30px;
+    	font-size: 15px;
+	}
+	.input-style{
+		padding-left:10px;
+		width: 80%;
+    	margin-top: 20px;
+		height: 38px;
+		line-height: 38px;
+		border: 1px solid #e6e6e6;
+		background-color: #fff;
+		border-radius: 2px;
+	}
+	.admin-regist-submit-btn{
+	    height: 38px;
+	    line-height: 38px;
+	    padding: 0 28px;
+	    background-color: #1AA094;
+	    color: #fff;
+	    border: none;
+	    opacity: .9;
+	    margin: 25px 0 0 80px;
+	}
+	#tishi{
+		margin-left: 15%;
+	    font-size: 12px;
+	    margin-top: 20px;
+	}
